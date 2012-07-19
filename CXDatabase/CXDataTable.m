@@ -37,7 +37,7 @@
 @synthesize objClass = _objClass;
 
 + (CXDataTable*) tableWithManagedObject:(Class)cls inDatabase:(CXDatabase*)database {
-    return [[[self alloc] initWithManagedObject:cls inDatabase:database] autorelease];
+    return FMDBAutorelease([[self alloc] initWithManagedObject:cls inDatabase:database]);
 }
 
 - (void) dealloc {
@@ -47,7 +47,9 @@
     self.indexFields = nil;
     self.primaryKey = nil;
     
+#if ! __has_feature(objc_arc)
     [super dealloc];
+#endif
 }
 
 - (id) init {

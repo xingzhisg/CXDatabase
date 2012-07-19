@@ -146,7 +146,7 @@ static const char * getPropertyType(objc_property_t property) {
 }
 
 + (NSString*) cxIndexNameForField:(NSString*)fieldName {
-    return [NSString stringWithFormat:@"%@_auto_index"];
+    return [NSString stringWithFormat:@"%@_auto_index", fieldName];
 }
 
 //////////////////////////////////////////////////
@@ -200,7 +200,7 @@ static const char * getPropertyType(objc_property_t property) {
         [invocation invokeWithTarget:obj];
     }
     
-    return [obj autorelease];
+    return FMDBAutorelease(obj);
 }
 
 //////////////////////////////////////////////////

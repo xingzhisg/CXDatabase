@@ -24,7 +24,10 @@
 
 - (void) dealloc {
     self.tableDict = nil;
+    
+#if ! __has_feature(objc_arc)
     [super dealloc];
+#endif
 }
 
 - (id)initWithPath:(NSString*)aPath {
