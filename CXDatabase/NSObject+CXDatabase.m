@@ -173,7 +173,13 @@ static const char * getPropertyType(objc_property_t property) {
         NSInvocation * invocation = [NSInvocation invocationWithMethodSignature:sig];
         [invocation setSelector:s];
         
-        if ([sqliteType isEqualToString:@"BLOB"] || [sqliteType isEqualToString:@"TEXT"] || [propertyType isEqualToString:@"NSDate"]) {
+        if ([propertyType isEqualToString:@"NSDate"]) {
+            id v = [dictionary objectForKey:key];
+            if ([v isEqual:[NSNull null]]) continue;
+            NSDate * date = [NSDate dateWithTimeIntervalSince1970:[v doubleValue]];
+            [invocation setArgument:&date atIndex:2];
+        }
+        else if ([sqliteType isEqualToString:@"BLOB"] || [sqliteType isEqualToString:@"TEXT"]) {
             id v = [dictionary objectForKey:key];
             if ([v isEqual:[NSNull null]]) continue;
             [invocation setArgument:([v isEqual:[NSNull null]] ? nil : &v) atIndex:2];

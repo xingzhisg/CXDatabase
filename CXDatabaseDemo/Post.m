@@ -31,7 +31,7 @@
 }
 
 + (NSString*) cxPrimaryKey{
-    return @"idx";
+    return @"createDate";
 }
 
 
@@ -49,7 +49,7 @@
 }
 
 - (NSString*) toString {
-    NSString * s = [NSString stringWithFormat:@"title: %@; image: %@; index: %d; rating: %lf; isRecommended: %d; pageViews: %lld; price: %f", self.title, self.image, self.idx, self.rating, self.isRecommended, self.pageViews, self.price];
+    NSString * s = [NSString stringWithFormat:@"title: %@; image: %@; create:%@ index: %d; rating: %lf; isRecommended: %d; pageViews: %lld; price: %f", self.title, self.image, self.createDate, self.idx, self.rating, self.isRecommended, self.pageViews, self.price];
     return s;
 }
 @end
