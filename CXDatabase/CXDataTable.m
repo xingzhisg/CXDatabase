@@ -37,7 +37,7 @@
 @synthesize objClass = _objClass;
 
 + (CXDataTable*) tableWithManagedObject:(Class)cls inDatabase:(CXDatabase*)database {
-    return FMDBAutorelease([[self alloc] initWithManagedObject:cls inDatabase:database]);
+    return FMDBReturnAutoreleased([[self alloc] initWithManagedObject:cls inDatabase:database]);
 }
 
 - (void) dealloc {

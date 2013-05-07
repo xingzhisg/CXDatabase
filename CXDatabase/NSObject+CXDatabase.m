@@ -112,7 +112,7 @@ static const char * getPropertyType(objc_property_t property) {
     free(properties);
     
     // returning a copy here to make sure the dictionary is immutable
-    managedObjectFields = [[NSDictionary dictionaryWithDictionary:results] retain];
+    managedObjectFields = FMDBReturnRetained([NSDictionary dictionaryWithDictionary:results]);
     
     return managedObjectFields;
 }
@@ -125,7 +125,7 @@ static const char * getPropertyType(objc_property_t property) {
     NSMutableArray * array = [NSMutableArray arrayWithArray:[[self cxManagedObjectFields] allKeys]];
     [array sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     
-    fields = [[NSArray arrayWithArray:array] retain];
+    fields = FMDBReturnRetained([NSArray arrayWithArray:array]);
     
     return fields;
 }
@@ -206,7 +206,7 @@ static const char * getPropertyType(objc_property_t property) {
         [invocation invokeWithTarget:obj];
     }
     
-    return FMDBAutorelease(obj);
+    return FMDBReturnAutoreleased(obj);
 }
 
 //////////////////////////////////////////////////
